@@ -10,26 +10,27 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    system-manager = {
-      url = "github:numtide/system-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     Akari.url = "github:HadziqM/Akari";
 
   };
 
   outputs =
-    { self, system-manager }@inputs:
     {
-      systemConfigs.default = system-manager.lib.makeSystemConfig {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
+    let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
+    {
+      homeConfigurations."default" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
         specialArgs = { inherit inputs; };
         modules = [
-          ./modules
-          {
-            nixpkgs.config.allowUnfree = true;
-          }
-          inputs.home-manager.nixosModules.default
+          ./home.nix
         ];
       };
     };
