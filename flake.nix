@@ -26,11 +26,18 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      homeConfigurations."default" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."developer" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = { inherit inputs; };
         modules = [
-          ./home.nix
+          ./home/developer.nix
+        ];
+      };
+      homeConfigurations."minimal" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = { inherit inputs; };
+        modules = [
+          ./home/minimal.nix
         ];
       };
     };

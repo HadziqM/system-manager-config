@@ -4,6 +4,10 @@
   home.packages = with pkgs; [
     bat
     eza
+    zsh
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    zsh-history-substring-search
   ];
 
   home.file = {

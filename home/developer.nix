@@ -4,33 +4,21 @@
   ...
 }:
 let
-  scriptFiles = builtins.attrNames (builtins.readDir ./scripts/home);
-  scripts = builtins.map (file: import (./scripts/home + "/${file}") { inherit pkgs; }) scriptFiles;
-
   username = builtins.getEnv "USER";
 in
 {
 
   imports = [
-    modules/home-manager/direnv.nix
-    modules/home-manager/zsh.nix
-    modules/home-manager/git.nix
+    ../modules/home-manager/direnv.nix
+    ../modules/home-manager/zsh.nix
+    ../modules/home-manager/git.nix
+    ../modules/home-manager/dotfile.nix
   ];
 
   home = {
     inherit username;
     homeDirectory = "/home/${username}";
 
-    file = {
-      # Top Level Files symlinks
-      ".ideavimrc".source = dotfiles/.ideavimrc;
-
-      # Config directories
-      ".config/fastfetch".source = dotfiles/.config/fastfetch;
-      ".config/kitty".source = dotfiles/.config/kitty;
-      ".config/tmux/tmux.conf".source = dotfiles/.config/tmux/tmux.conf;
-      ".config/yazi".source = dotfiles/.config/yazi;
-    };
     sessionVariables = {
       # Default applications
       EDITOR = "nvim";
@@ -59,7 +47,6 @@ in
       # my NixVim configuration
       inputs.Akari.packages.${system}.default
 
-      vim
       curl
       zsh-syntax-highlighting
       zsh-autosuggestions

@@ -1,8 +1,8 @@
 { pkgs }:
 
 pkgs.writeShellApplication {
-  name = "test";
+  name = "test-nix";
   text = ''
-    echo "tested"
+    echo "nix script tested"
   '';
 }
