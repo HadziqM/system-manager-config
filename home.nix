@@ -16,6 +16,8 @@ in
   ];
 
   home = {
+    username = builtins.getEnv "USER";
+    homeDirectory = builtins.getEnv "HOME";
     file = {
       # Top Level Files symlinks
       ".ideavimrc".source = dotfiles/.ideavimrc;
