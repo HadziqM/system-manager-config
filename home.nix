@@ -6,6 +6,8 @@
 let
   scriptFiles = builtins.attrNames (builtins.readDir ./scripts/home);
   scripts = builtins.map (file: import (./scripts/home + "/${file}") { inherit pkgs; }) scriptFiles;
+
+  username = builtins.getEnv "USER";
 in
 {
 
@@ -16,8 +18,9 @@ in
   ];
 
   home = {
-    username = builtins.getEnv "USER";
-    homeDirectory = builtins.getEnv "HOME";
+    inherit username;
+    homeDirectory = "/home/${username}";
+
     file = {
       # Top Level Files symlinks
       ".ideavimrc".source = dotfiles/.ideavimrc;
