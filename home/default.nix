@@ -5,17 +5,17 @@
   ...
 }:
 let
-  configuration = home-manager.lib.homeConfigurations;
+  configuration = home-manager.lib.homeManagerConfiguration;
 in
 {
 
   "developer" = configuration {
     inherit pkgs extraSpecialArgs;
-    module = ./developer.nix;
+    modules = [ ./developer.nix ];
   };
 
   "minimal" = configuration {
     inherit pkgs extraSpecialArgs;
-    module = ./minimal.nix;
+    modules = [ ./minimal.nix ];
   };
 }
