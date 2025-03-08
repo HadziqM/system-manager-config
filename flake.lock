@@ -263,7 +263,8 @@
       "inputs": {
         "Akari": "Akari",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_3",
+        "system-manager": "system-manager"
       }
     },
     "rustvim": {
@@ -279,6 +280,26 @@
       "original": {
         "owner": "rust-lang",
         "repo": "rust.vim",
+        "type": "github"
+      }
+    },
+    "system-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1741006529,
+        "narHash": "sha256-C9Td+pCQ/qNpr75ZCPpOlOwHZW1zRzi6AXj+p+Mrw10=",
+        "owner": "numtide",
+        "repo": "system-manager",
+        "rev": "9f8f766c3b8a19c68aa43ab19c94b0641d6a5b20",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "system-manager",
         "type": "github"
       }
     },

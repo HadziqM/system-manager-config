@@ -11,12 +11,6 @@ pkgs.writeShellApplication {
       exit 1
     fi
 
-    # Ensure script is run as root
-    if [ "$(id -u)" -ne 0 ]; then
-      echo "This script must be run as root!"
-      exit 1
-    fi
-
     # Swap size in GB
     SWAP_SIZE="$1G"
 
