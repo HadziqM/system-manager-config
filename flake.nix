@@ -37,6 +37,12 @@
       homeConfigurations = import ./home {
         inherit home-manager pkgs;
         extraSpecialArgs = { inherit inputs; };
+        modules = [
+          {
+            # Enable unfree packages globally
+            nixpkgs.config.allowUnfree = true;
+          }
+        ];
       };
     };
   # inputs.flake-parts.lib.mkFlake { inherit inputs; } {
