@@ -25,19 +25,27 @@
   outputs =
     inputs@{
       home-manager,
+      nixpkgs,
+      systems,
       ...
     }:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = import inputs.systems;
+      systems = import systems;
       imports = [
         inputs.process-compose-flake.flakeModule
         home-manager.flakeModules.home-manager
       ];
       flake = {
-        homeConfigurations = import ./home {
-          inherit home-manager;
-          extraSpecialArgs = { inherit inputs; };
-        };
+        homeConfigurations = builtins.listToAttrs (
+          map (system: {
+            name = system;
+            value = import ./home {
+              pkgs = nixpkgs.legacyPackages.${system};
+              inherit home-manager;
+              extraSpecialArgs = { inherit inputs; };
+            };
+          }) (import systems)
+        );
       };
       perSystem =
         {
