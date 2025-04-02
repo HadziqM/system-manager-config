@@ -25,7 +25,6 @@
   outputs =
     inputs@{
       home-manager,
-      nixpkgs,
       systems,
       ...
     }:
@@ -35,25 +34,18 @@
         inputs.process-compose-flake.flakeModule
         home-manager.flakeModules.home-manager
       ];
-      flake = {
-        homeConfigurations = builtins.listToAttrs (
-          map (system: {
-            name = system;
-            value = import ./home {
-              pkgs = nixpkgs.legacyPackages.${system};
-              inherit home-manager;
-              extraSpecialArgs = { inherit inputs; };
-            };
-          }) (import systems)
-        );
-      };
       perSystem =
         {
-          self',
           pkgs,
+          system,
           ...
         }:
         {
+          homeConfigurations.${system} = import ./home {
+            pkgs = inputs.nixpkgs.legacyPackages.${system};
+            inherit home-manager;
+            extraSpecialArgs = { inherit inputs; };
+          };
           process-compose = import ./services {
             inherit pkgs;
             specialArgs = { inherit inputs; };
