@@ -33,17 +33,12 @@
         inputs.process-compose-flake.flakeModule
         home-manager.flakeModules.home-manager
       ];
-      flake =
-        {
-          pkgs,
-          ...
-        }:
-        {
-          homeConfigurations = import ./home {
-            inherit pkgs home-manager;
-            extraSpecialArgs = { inherit inputs; };
-          };
+      flake = {
+        homeConfigurations = import ./home {
+          inherit home-manager;
+          extraSpecialArgs = { inherit inputs; };
         };
+      };
       perSystem =
         {
           self',
