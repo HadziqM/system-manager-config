@@ -33,6 +33,17 @@
         inputs.process-compose-flake.flakeModule
         home-manager.flakeModules.home-manager
       ];
+      flake =
+        {
+          pkgs,
+          ...
+        }:
+        {
+          homeConfigurations = import ./home {
+            inherit pkgs home-manager;
+            extraSpecialArgs = { inherit inputs; };
+          };
+        };
       perSystem =
         {
           self',
@@ -43,10 +54,6 @@
           process-compose = import ./services {
             inherit pkgs;
             specialArgs = { inherit inputs; };
-          };
-          homeConfigurations = import ./home {
-            inherit pkgs home-manager;
-            extraSpecialArgs = { inherit inputs; };
           };
         };
     };
