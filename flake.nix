@@ -31,6 +31,7 @@
       systems = import inputs.systems;
       imports = [
         inputs.process-compose-flake.flakeModule
+        home-manager.flakeModules.home-manager
       ];
       perSystem =
         {
