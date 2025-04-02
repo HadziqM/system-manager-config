@@ -18,4 +18,8 @@ in
     inherit pkgs extraSpecialArgs;
     modules = [ ./minimal.nix ];
   };
+  "casual" = configuration {
+    inherit pkgs extraSpecialArgs;
+    modules = [ ./casual.nix ];
+  };
 }
