@@ -41,7 +41,7 @@
           ...
         }:
         {
-          homeConfigurations.${system} = import ./home {
+          ${system}.homeConfigurations = import ./home {
             pkgs = inputs.nixpkgs.legacyPackages.${system};
             inherit home-manager;
             extraSpecialArgs = { inherit inputs; };
