@@ -1,6 +1,6 @@
 {
   imports = [
-    ../minimal.nix
+    ./minimal.nix
     ../modules/home-manager/spotify.nix
   ];
 }
