@@ -38,10 +38,10 @@
             inherit pkgs;
             specialArgs = { inherit inputs; };
           };
-          # homeConfigurations = import ./home {
-          #   inherit pkgs home-manager;
-          #   extraSpecialArgs = { inherit inputs; };
-          # };
+          homeConfigurations = import ./home {
+            inherit pkgs home-manager;
+            extraSpecialArgs = { inherit inputs; };
+          };
         };
     };
 }
